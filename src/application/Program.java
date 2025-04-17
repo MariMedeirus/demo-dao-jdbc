@@ -19,8 +19,14 @@ public class Program {
 		
 		System.out.println("--- Test find by Department");
 		Department department = new Department(4,null);
-		List<Seller> list = sellerDao.findByDepartment(department);
-		for(Seller sel : list) {
+		List<Seller> listDepartment = sellerDao.findByDepartment(department);
+		for(Seller sel : listDepartment) {
+			System.out.println(sel);
+		}
+		
+		System.out.println("--- Test find by Department");
+		List<Seller> listAll = sellerDao.findAll();
+		for(Seller sel : listAll) {
 			System.out.println(sel);
 		}
 ;	}
