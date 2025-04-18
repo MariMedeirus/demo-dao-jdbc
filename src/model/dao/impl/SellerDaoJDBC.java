@@ -23,20 +23,94 @@ public class SellerDaoJDBC implements SellerDao{
 		this.conn = conn;
 	}
 	@Override
-	public void insert(Seller obj) {
-		// TODO Auto-generated method stub
+	public void insert(Seller sel) {
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(
+					"INSERT INTO seller "
+					+"(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+					+"VALUES"
+					+"(?, ?, ?, ?, ?)",
+					 PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			st.setString(1, sel.getName());
+			st.setString(2, sel.getEmail());
+			st.setDate(3, new java.sql.Date(sel.getBirthDate().getTime()));
+			st.setDouble(4, sel.getBaseSalary());
+			st.setInt(5, sel.getDepartment().getId());
+			
+			int rowsAffected = st.executeUpdate();
+			
+			if (rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+				 if(rs.next()) {
+					 int id = rs.getInt(1);
+					 sel.setId(id);
+				 }
+			DB.closeResultSet(rs);
+			}	 
+			
+			else {
+				throw new DbException("Unexpecter error! No rows affected!");
+			}
+			
+		}
+		catch(SQLException e){
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
-	public void update(Seller obj) {
-		// TODO Auto-generated method stub
+	public void update(Seller sel) {
+		PreparedStatement st = null;
+		
+		try {
+			st = conn.prepareStatement(
+					"UPDATE seller "
+					+"SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
+					+"WHERE Id = ?");
+
+			
+			st.setString(1, sel.getName());
+			st.setString(2, sel.getEmail());
+			st.setDate(3, new java.sql.Date(sel.getBirthDate().getTime()));
+			st.setDouble(4, sel.getBaseSalary());
+			st.setInt(5, sel.getDepartment().getId());
+			st.setInt(6, sel.getId());
+			
+			st.executeUpdate();
+		}
+		catch(SQLException e){
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 		
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
 		
+		try {
+			st = conn.prepareStatement(
+					"DELETE FROM seller "
+					+"WHERE Id = ?");
+			
+			st.setInt(1, id);
+			st.executeUpdate();
+		}
+		catch(SQLException e){
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
