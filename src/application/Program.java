@@ -36,7 +36,7 @@ public class Program {
 		sellerDao.insert(newSeller);
 		System.out.println("Inserted! New id = " + newSeller.getId());
 		
-		System.out.println("--- Test seler update ---");
+		System.out.println("--- Test seller update ---");
 		seller = sellerDao.findById(12);
 		seller.setName("Joey");
 		sellerDao.update(seller);
