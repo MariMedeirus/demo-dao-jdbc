@@ -24,10 +24,10 @@ public class Program2 {
 		}
 		
 		
-		System.out.println("--- Test insert ---");
-		Department newDepartment = new Department(null, "T.I.");
-		departmentDao.insert(newDepartment);
-		System.out.println("Inserted! New id = " + newDepartment.getId());
+		//System.out.println("--- Test insert ---");
+		//Department newDepartment = new Department(null, "T.I.");
+		//departmentDao.insert(newDepartment);
+		//System.out.println("Inserted! New id = " + newDepartment.getId());
 		
 		
 		System.out.println("--- Test department update ---");
@@ -35,6 +35,11 @@ public class Program2 {
 		dep.setName("Marketing");
 		departmentDao.update(dep);
 		System.out.println("Update completed");
+		
+		
+		System.out.println("--- Test deleteById ---");
+		departmentDao.deleteById(6);
+		System.out.println("Delete completed");
 	}
 
 }
