@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
@@ -23,7 +24,14 @@ public class Program2 {
 		for(Department x : listAll) {
 			System.out.println(x);
 		}
+		
 
+		System.out.println("--- Test insert ---");
+		Department newDepartment = new Department(null, "T.I.");
+		departmentDao.insert(newDepartment);
+		System.out.println("Inserted! New id = " + newDepartment.getId());
+		
+		
 	}
 
 }
