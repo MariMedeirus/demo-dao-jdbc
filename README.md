@@ -17,7 +17,7 @@ The main goal of this project is to demonstrate how to organize JDBC-based persi
 
 ## 🧰 Technologies Used
 
-- Java 17
+- Java 21
 - JDBC (Java Database Connectivity)
 - MySQL
 - DAO Pattern
